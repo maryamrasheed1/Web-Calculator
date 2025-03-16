@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonic Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('Purple.jpg'); /* Relative path to the image */
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Rectangle styles */
+        .rectangle {
+            width: 400px; /* Width of the rectangle */
+            height: 500px; /* Increased height to accommodate the header */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 20px; /* Curved corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
+            padding: 20px; /* Add some padding inside the rectangle */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header styles */
+        .header {
+            font-size: 28px;
+            font-weight: bold; /* Ensure the text is bold */
+            color: #333; /* Dark gray color */
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        /* Calculator display */
+        .display {
+            width: 95%;
+            height: 60px;
+            background-color: #e28bee;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 24px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Calculator buttons grid */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 10px; /* Space between buttons */
+            width: 100%;
+        }
+
+        /* Button styles */
+        .buttons button {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #6797f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #ee7676;
+        }
+
+        /* Operator buttons */
+        .buttons button.operator {
+            background-color: #ff9500;
+            color: rgb(23, 27, 23);
+        }
+
+        .buttons button.operator:hover {
+            background-color: #e08900;
+        }
+    </style>
+</head>
+<body>
+    <!-- Vertical rectangle with calculator -->
+    <div class="rectangle">
+        <!-- Header -->
+        <div class="header">Sonic Calculator</div>
+
+        <!-- Calculator display -->
+        <div class="display" id="display">0</div>
+
+        <!-- Calculator buttons -->
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('(')">(</button>
+            <button onclick="appendToDisplay(')')">)</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for calculator functionality
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.innerText = eval(display.innerText);
+            } catch (e) {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
